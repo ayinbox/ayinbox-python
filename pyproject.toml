@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ayinbox"
+dynamic = ["version"]
+description = "Official Python client for the AY Inbox REST API"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "AY Inbox", email = "team@ayinbox.com" }]
+keywords = ["ayinbox", "cold email", "email", "api", "sdk"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = ["httpx>=0.23,<1"]
+
+[project.urls]
+Homepage = "https://ayinbox.com"
+Documentation = "https://docs.ayinbox.com/api/"
+Source = "https://github.com/ayinbox/ayinbox-python"
+Changelog = "https://github.com/ayinbox/ayinbox-python/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+dev = ["pytest>=7", "mypy==2.4.1", "ruff==0.17.5"]
+
+[tool.hatch.version]
+path = "src/ayinbox/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ayinbox"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/ayinbox", "tests", "README.md", "LICENSE", "CHANGELOG.md"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+src = ["src", "tests"]
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+
+[tool.mypy]
+strict = true
+files = ["src/ayinbox", "tests", "examples", "scripts"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
